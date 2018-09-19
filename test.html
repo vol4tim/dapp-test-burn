@@ -19,10 +19,20 @@
 		  	console.log(e)
 		  })
     	}
+    	function pay2() {
+    		axios.get('https://devjs-01.corp.aira.life:3017/account/0x008eb1c16451648e5ba1dabbf1aaf5d0b89d7e4c')
+		  .then(function (response) {
+		    console.log(response);
+		  })
+		  .catch((e) => {
+		  	console.log(e)
+		  })
+    	}
     	
     </script>
   </head>
   <body>
   	<button onclick="pay()">test</button>
+  	<button onclick="pay2()">test 2</button>
   </body>
 </html>
