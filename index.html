@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>calc</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="./BtnBurn.umd.min.js"></script>
+  </head>
+  <body>
+    <h2>Environmental units registry Renewable Test Unit</h2>
+    <h3>beneficiar = 0x8cb0ce5faaa13f82d505cee30bd869700b09ffe0</h3>
+    <h3>0.1 ETH = 1.000 RTU</h3>
+    <textarea id="txt"></textarea><br />
+    <div id="btn-1">
+      <btn
+        url='https://devjs-01.corp.aira.life:3017/'
+        beneficiar='0x8cb0ce5faaa13f82d505cee30bd869700b09ffe0'
+        token='0xba1e20a4c2a48d3be88c624da06844f7e030ef59'
+        :wei-default="weiDefault()"
+        :get-comment="getComment"
+        :burn-calc="burnCalc"
+        :send-eth-cb="sendEthCb"
+        :confirm-eth-cb="confirmEthCb"
+        :send-burn-cb="sendBurnCb"
+        :confirm-burn-cb="confirmBurnCb"
+      />
+    </div>
+    <div id="log" style="border:1px solid #eee;"></div>
+    <script>
+    window.addEventListener('load', () => {
+      new Vue({
+        components: {
+          btn: BtnBurn
+        },
+        methods: {
+          weiDefault () {
+            return Number(web3.toWei(0.1))
+          },
+          getComment: () => {
+            return document.getElementById("txt").value
+          },
+          burnCalc (wei) {
+            return wei / 100000000000000
+          },
+          sendEthCb (tx) {
+            var log = document.getElementById("log");
+            var newcontent = document.createElement('p');
+            newcontent.innerHTML = 'send eth tx: ' + tx;
+            log.appendChild(newcontent);
+            // console.log('send eth tx:', tx)
+          },
+          confirmEthCb (amount, burn) {
+            var log = document.getElementById("log");
+            var newcontent = document.createElement('p');
+            newcontent.innerHTML = 'eth sended ' + amount + ' ' + burn;
+            log.appendChild(newcontent);
+            // console.log('eth sended', amount, burn)
+          },
+          sendBurnCb (tx) {
+            var log = document.getElementById("log");
+            var newcontent = document.createElement('p');
+            newcontent.innerHTML = 'send burn tx: ' + tx;
+            log.appendChild(newcontent);
+            // console.log('send burn tx:', tx)
+          },
+          confirmBurnCb (data) {
+            var log = document.getElementById("log");
+            var newcontent = document.createElement('p');
+            newcontent.innerHTML = 'hash: ' + data.hash;
+            log.appendChild(newcontent);
+            // console.log('ok', data)
+          }
+        }
+      }).$mount('#btn-1')
+    })
+    </script>
+  </body>
+</html>
