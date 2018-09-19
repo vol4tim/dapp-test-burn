@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>calc</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+    	function pay() {
+    		axios.post('https://devjs-01.corp.aira.life:3017/', {
+		    tx: '0x1231321',
+		    token: '0x55555555555555555'
+		  })
+		  .then(function (response) {
+		    console.log(response);
+		  })
+		  .catch((e) => {
+		  	console.log(e)
+		  })
+    	}
+    	
+    </script>
+  </head>
+  <body>
+  	<button onclick="pay()"></button>
+  </body>
+</html>
